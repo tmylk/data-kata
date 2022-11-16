@@ -7,11 +7,15 @@ columns to read = ['Id','Street','YearBuilt','Fireplaces', 'FireplaceQu','1stFlr
 
 The checks:
 
- - id is unique
+ - id is int
  - Street column is a string
- - YearBuilt minimal value is between 1700 and 1900.
+ - YearBuilt value is between 1700 and 1900.
+ - firstfloor is at least one third of the 2nd floor
  - FireplaceQuality - FireplaceQu - optional - nullable - enum values of 'Ex', 'Gd', 'TA', 'Fa', 'Po'. If Fireplaces is greater than 0, FireplaceQu is required.
- - firstfloor bigger than 2nd floor
+ 
+
+ Bonus:
+ - id is unique
 
 
 
@@ -22,6 +26,8 @@ Try it with several frameworks - pandas, pydantic, Great Expectations, Pandera, 
 
 Exercises taken from a much more extensive tutorial and talk by Natan Mish
 https://github.com/NatanMish/data_validation/
+
+And inspired by a step in Laszlo's Titanic refactoring exercise  https://github.com/xLaszlo/CQ4DS-notebook-sklearn-refactoring-exercise
 
 
 ## Data
