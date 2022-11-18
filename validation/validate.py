@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import Any, List, Optional
 
+import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field, ValidationError, root_validator, validator
 
@@ -18,7 +19,7 @@ class House(BaseModel):
     Street: str
     YearBuilt: int
     Fireplaces: int
-    FireplaceQuality: Optional[str] = Field(alias="FireplaceQu")  # TODO: enforce enum
+    FireplaceQuality: Optional[FireplaceQualityEnum] = Field(alias="FireplaceQu")
     FirstFloorSquareFootage: int = Field(alias="1stFlrSF")
     SecondFloorSquareFootage: int = Field(alias="2ndFlrSF")
 
@@ -56,6 +57,8 @@ def read_and_validate(csv_file: str = "data/train.csv") -> HouseList:
         csv_file,
         usecols=["Id", "Street", "YearBuilt", "Fireplaces", "FireplaceQu", "1stFlrSF", "2ndFlrSF"],
     )
+    # News to convert pandas float nan to None so that Pydantic Optional works.
+    df = df.replace({np.nan: None})
     houses = [House(**house_dict) for house_dict in df.to_dict("index").values()]
     house_list = HouseList(houses=houses)
 
