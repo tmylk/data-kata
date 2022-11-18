@@ -32,5 +32,5 @@ And inspired by a step in Laszlo's Titanic refactoring exercise  https://github.
 
 ## Data
 
-Datasetis taken from the [House prices 
+Dataset is taken from the [House prices 
 prediction competition on Kaggle](https://www.kaggle.com/competitions/home-data-for-ml-course/data). 

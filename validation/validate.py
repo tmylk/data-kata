@@ -56,7 +56,7 @@ def read_and_validate(csv_file: str = "data/train.csv") -> HouseList:
     df = pd.read_csv(
         csv_file,
         usecols=["Id", "Street", "YearBuilt", "Fireplaces", "FireplaceQu", "1stFlrSF", "2ndFlrSF"],
-    )   
+    )
     # convert pandas float nan to None so that Pydantic Optional works.
     df = df.replace({np.nan: None})
     houses = [House(**house_dict) for house_dict in df.to_dict("index").values()]
