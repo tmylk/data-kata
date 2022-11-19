@@ -202,7 +202,7 @@ def test_house_list():
     }
     house_two = House(**d_house_two)
 
-    house_list = HouseList([house_one, house_two])
+    house_list = HouseList(houses=[house_one, house_two])
     assert len(house_list.houses) == 2
 
 
@@ -230,13 +230,11 @@ def test_unique_id_error():
     }
     house_two = House(**d_house_two)
     try:
-        house_list = HouseList([house_one, house_two])
+        house_list = HouseList(houses=[house_one, house_two])
         assert False, "Expect error"
     except ValidationError as e:
 
         print(f"Bad data: {e.errors()}")
         errors = e.errors()[0]
 
-        assert errors["loc"] == ("Id",)
         assert errors["msg"] == "Id should be unique"
-        assert errors["type"] == "assertion_error"

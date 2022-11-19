@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional
+from typing import List, Optional
 
 import pandas as pd
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, root_validator, validator
 
 
 class FireplaceQualityEnum(str, Enum):
@@ -42,9 +42,19 @@ class House(BaseModel):
         return v
 
 
-@dataclass
-class HouseList:
-    houses: list
+class HouseList(BaseModel):
+    houses: List[House]
+
+    @root_validator(pre=True)
+    def check_id_unique(cls, values):
+        root_values = values.get("houses")
+        value_set = set()
+        for value in root_values:
+            if value.Id in value_set:
+                raise ValueError("Id should be unique")
+            else:
+                value_set.add(value.Id)
+        return values
 
 
 def read_csv(csv_file: str = "data/train.csv") -> pd.DataFrame:
