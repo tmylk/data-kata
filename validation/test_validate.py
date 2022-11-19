@@ -53,9 +53,5 @@ def test_YearBuilt_error():
 
         print(f"Bad data: {e.errors()}")
         assert e.errors() == [
-            {
-                "loc": ("YearBuilt",),
-                "msg": "YearBuilt not in range 1700 to 1900",
-                "type": "value_error",
-            }
+            {"loc": ("YearBuilt",), "msg": "Yearbuilt not in 1700-1900", "type": "assertion_error"}
         ]

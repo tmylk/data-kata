@@ -10,7 +10,7 @@
     - one by one add Id=1, Street = 'Sesame', Fireplaces=0, FireplaceQu=None, 1stFlrSF=100, 2ndFlrSF=50 to the test and let it pass each time
     
 
-- [ ] validation YearBuilt
+- [x] validation YearBuilt
     - write a failing test for creating a House object with  yearbuilt 2000. It should return an error stating YearBuilt as the issue
     - make it pass. 
 
