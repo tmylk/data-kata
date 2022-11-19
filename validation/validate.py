@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
 
+import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field, root_validator, validator
 
@@ -62,3 +63,12 @@ def read_csv(csv_file: str = "data/train.csv") -> pd.DataFrame:
         csv_file,
         usecols=["Id", "Street", "YearBuilt", "Fireplaces", "FireplaceQu", "1stFlrSF", "2ndFlrSF"],
     )
+
+
+def read_valid_house_list_from_csv(csv_file: str = "data/train.csv") -> HouseList:
+    df = read_csv(csv_file=csv_file)
+    # convert pandas float nan to None so that Pydantic Optional works for fireplace quality
+    df = df.replace({np.nan: None})
+    house_list = [House(**house_dict) for house_dict in df.to_dict("index").values()]
+
+    return house_list

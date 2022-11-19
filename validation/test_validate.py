@@ -1,5 +1,5 @@
 from pydantic import ValidationError
-from validate import House, HouseList, read_csv
+from validate import House, HouseList, read_csv, read_valid_house_list_from_csv
 
 
 def test_csv_read():
@@ -238,3 +238,8 @@ def test_unique_id_error():
         errors = e.errors()[0]
 
         assert errors["msg"] == "Id should be unique"
+
+
+def test_house_list_from_csv_read():
+    house_list = read_valid_house_list_from_csv()
+    assert len(house_list) > 0
