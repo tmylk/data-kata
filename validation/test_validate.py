@@ -94,7 +94,7 @@ def test_FirstFloor_SecondFloor_error():
             "Fireplaces": 0,
             "FireplaceQu": None,
             "Street": "Sesame",
-            "1stFlrSF": 100,
+            "1stFlrSF": 10,
             "2ndFlrSF": 50,
         }
         house = House(**d)
@@ -104,5 +104,9 @@ def test_FirstFloor_SecondFloor_error():
 
         print(f"Bad data: {e.errors()}")
         assert e.errors() == [
-            {"loc": ("YearBuilt",), "msg": "Yearbuilt not in 1700-1900", "type": "assertion_error"}
+            {
+                "loc": ("1stFlrSF",),
+                "msg": "First floor must be at least one third of the 2nd floor",
+                "type": "assertion_error",
+            }
         ]

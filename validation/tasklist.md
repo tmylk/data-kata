@@ -22,9 +22,8 @@
     - Same for 2ndFlrSF=50.
 
 - [ ] validation firstfloor is at least one third of the 2nd floor
-    - failing test for creating House with 1stFlrSF=100, 2ndFlrSF=50. Think of using an alias as the field as it starts with a not-a-letter
-    - 
-    - write a failing test for creating a House object with  firstfloor being a quarter of the 2nd floor. Expect a validation error.
+    
+    - write a failing test for creating a House object with  1stFlrSF=10, 2ndFlrSF=50. Expect a validation error.
     - make it pass. 
 
 
