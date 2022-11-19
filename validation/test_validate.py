@@ -15,7 +15,17 @@ def test_columns():
 
 
 def create_house():
-    return House(YearBuilt=1800, Id=1, Fireplaces=0, FireplaceQu=None, Street="Sesame")
+    d = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 0,
+        "FireplaceQu": None,
+        "Street": "Sesame",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+
+    return House(**d)
 
 
 def test_create_house_YearBuilt():
@@ -46,7 +56,48 @@ def test_create_house_Street():
 
 def test_YearBuilt_error():
     try:
-        house = House(YearBuilt=2000, Id=1, Fireplaces=0, FireplaceQu=None, Street="Sesame")
+        d = {
+            "YearBuilt": 2000,
+            "Id": 1,
+            "Fireplaces": 0,
+            "FireplaceQu": None,
+            "Street": "Sesame",
+            "1stFlrSF": 100,
+            "2ndFlrSF": 50,
+        }
+        house = House(**d)
+        assert False, "Expect error"
+
+    except ValidationError as e:
+
+        print(f"Bad data: {e.errors()}")
+        assert e.errors() == [
+            {"loc": ("YearBuilt",), "msg": "Yearbuilt not in 1700-1900", "type": "assertion_error"}
+        ]
+
+
+def test_create_house_FirstFlrSF():
+    house = create_house()
+    assert house.FirstFlrSF == 100
+
+
+def test_create_house_SecondFlrSF():
+    house = create_house()
+    assert house.SecondFlrSF == 50
+
+
+def test_FirstFloor_SecondFloor_error():
+    try:
+        d = {
+            "YearBuilt": 1800,
+            "Id": 1,
+            "Fireplaces": 0,
+            "FireplaceQu": None,
+            "Street": "Sesame",
+            "1stFlrSF": 100,
+            "2ndFlrSF": 50,
+        }
+        house = House(**d)
         assert False, "Expect error"
 
     except ValidationError as e:
