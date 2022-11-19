@@ -1,3 +1,4 @@
+from pydantic import ValidationError
 from validate import House, read_csv
 
 
@@ -13,6 +14,48 @@ def test_columns():
     )
 
 
-def test_create_house():
-    house = House(YearBuilt=1800, Id=1, Fireplaces=0, FireplaceQu=None, Street="Sesame")
+def create_house():
+    return House(YearBuilt=1800, Id=1, Fireplaces=0, FireplaceQu=None, Street="Sesame")
+
+
+def test_create_house_YearBuilt():
+    house = create_house()
     assert house.YearBuilt == 1800
+
+
+def test_create_house_id():
+    house = create_house()
+
+    assert house.Id == 1
+
+
+def test_create_house_Fireplaces():
+    house = create_house()
+    assert house.Fireplaces == 0
+
+
+def test_create_house_FireplaceQu():
+    house = create_house()
+    assert house.FireplaceQu is None
+
+
+def test_create_house_Street():
+    house = create_house()
+    assert house.Street == "Sesame"
+
+
+def test_YearBuilt_error():
+    try:
+        house = House(YearBuilt=2000, Id=1, Fireplaces=0, FireplaceQu=None, Street="Sesame")
+        assert False, "Expect error"
+
+    except ValidationError as e:
+
+        print(f"Bad data: {e.errors()}")
+        assert e.errors() == [
+            {
+                "loc": ("YearBuilt",),
+                "msg": "YearBuilt not in range 1700 to 1900",
+                "type": "value_error",
+            }
+        ]
