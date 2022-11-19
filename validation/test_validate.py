@@ -193,7 +193,7 @@ def test_house_list():
 
     d_house_two = {
         "YearBuilt": 1800,
-        "Id": 1,
+        "Id": 2,
         "Fireplaces": 5,
         "FireplaceQu": "Ex",
         "Street": "Elm",
@@ -204,3 +204,39 @@ def test_house_list():
 
     house_list = HouseList([house_one, house_two])
     assert len(house_list.houses) == 2
+
+
+def test_unique_id_error():
+
+    d_house_one = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 0,
+        "FireplaceQu": None,
+        "Street": "Sesame",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+    house_one = House(**d_house_one)
+
+    d_house_two = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 5,
+        "FireplaceQu": "Ex",
+        "Street": "Elm",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+    house_two = House(**d_house_two)
+    try:
+        house_list = HouseList([house_one, house_two])
+        assert False, "Expect error"
+    except ValidationError as e:
+
+        print(f"Bad data: {e.errors()}")
+        errors = e.errors()[0]
+
+        assert errors["loc"] == ("Id",)
+        assert errors["msg"] == "Id should be unique"
+        assert errors["type"] == "assertion_error"
