@@ -21,28 +21,32 @@
     - make it pass. 
     - Same for 2ndFlrSF=50.
 
-- [ ] validation firstfloor is at least one third of the 2nd floor
+- [x] validation firstfloor is at least one third of the 2nd floor
     
     - write a failing test for creating a House object with  1stFlrSF=10, 2ndFlrSF=50. Expect a validation error.
     - make it pass. 
 
 
-- [ ] validation FireplaceQuality is one of 'Ex', 'Gd', 'TA', 'Fa', 'Po', None
-  - write a failing test for creating a House object with  fireplacequality being 'OK'. Expect a validation error.
+- [x] validation FireplaceQuality is one of 'Ex', 'Gd', 'TA', 'Fa', 'Po', None
+  - write a regression test for creating a House object with Fireplaces=5 and  fireplacequality being 'Ex'. Expect a pass  
+  - write a failing test for creating a House object with Fireplaces=5 and  fireplacequality being 'OK'. Expect a validation error.
   - make it pass. 
 
-- [ ] validation if Fireplaces is greater than 0, FireplaceQu is required.
+- [x] validation if Fireplaces is greater than 0, FireplaceQu is required.
    - write a failing test for creating a House object with  fireplacequality being empty while Fireplaces is 1
   - make it pass. Return a validation error
+  - check can still create a House object with fireplacequality empty  empty while Fireplaces is 0
 
 - [ ] create a HouseList class to hold multiple houses
     - write a failing test creating a list of two houses
     - make it pass 
 
 - [ ] unique Id validation
-    - - write a failing test creating a list of two houses with same Id
+    - write a failing test creating a list of two houses with same Id
     - make it pass - Return a validation error
 
+- [ ] read csv in data/train.csv and return only valid rows
+    - what does pandas using for the missing value? is it different to what pydantic expects as the missing value for FireplaceQuality? what is the best way to fix that?
 
 
 

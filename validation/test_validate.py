@@ -46,7 +46,7 @@ def test_create_house_Fireplaces():
 
 def test_create_house_FireplaceQu():
     house = create_house()
-    assert house.FireplaceQu is None
+    assert house.FireplaceQuality is None
 
 
 def test_create_house_Street():
@@ -110,3 +110,69 @@ def test_FirstFloor_SecondFloor_error():
                 "type": "assertion_error",
             }
         ]
+
+
+def test_FireplaceQuality_Ex():
+
+    d = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 5,
+        "FireplaceQu": "Ex",
+        "Street": "Sesame",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+    house = House(**d)
+    assert house.FireplaceQuality == "Ex"
+
+
+def test_FireplaceQuality_enum_error():
+    try:
+        d = {
+            "YearBuilt": 1800,
+            "Id": 1,
+            "Fireplaces": 5,
+            "FireplaceQu": "OK",
+            "Street": "Sesame",
+            "1stFlrSF": 100,
+            "2ndFlrSF": 50,
+        }
+        house = House(**d)
+        assert False, "Expect error"
+
+    except ValidationError as e:
+
+        print(f"Bad data: {e.errors()}")
+        errors = e.errors()[0]
+
+        assert errors["loc"] == ("FireplaceQu",)
+        assert (
+            errors["msg"]
+            == "value is not a valid enumeration member; permitted: 'Ex', 'Gd', 'TA', 'Fa', 'Po'"
+        )
+        assert errors["type"] == "type_error.enum"
+
+
+def test_FireplaceQuality_missing_error():
+    try:
+        d = {
+            "YearBuilt": 1800,
+            "Id": 1,
+            "Fireplaces": 5,
+            "FireplaceQu": None,
+            "Street": "Sesame",
+            "1stFlrSF": 100,
+            "2ndFlrSF": 50,
+        }
+        house = House(**d)
+        assert False, "Expect error"
+
+    except ValidationError as e:
+
+        print(f"Bad data: {e.errors()}")
+        errors = e.errors()[0]
+
+        assert errors["loc"] == ("FireplaceQu",)
+        assert errors["msg"] == "No fireplace quality while fireplaces exist"
+        assert errors["type"] == "assertion_error"

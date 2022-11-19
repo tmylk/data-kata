@@ -1,15 +1,24 @@
 from dataclasses import dataclass
+from enum import Enum
 from typing import Optional
 
 import pandas as pd
 from pydantic import BaseModel, Field, validator
 
 
+class FireplaceQualityEnum(str, Enum):
+    Ex = "Ex"
+    Gd = "Gd"
+    TA = "TA"
+    Fa = "Fa"
+    Po = "Po"
+
+
 class House(BaseModel):
     YearBuilt: int
     Id: int
     Fireplaces: int
-    FireplaceQu: Optional[str]
+    FireplaceQuality: Optional[FireplaceQualityEnum] = Field(alias="FireplaceQu")
     Street: str
     SecondFlrSF: int = Field(alias="2ndFlrSF")
     FirstFlrSF: int = Field(alias="1stFlrSF")
@@ -24,6 +33,12 @@ class House(BaseModel):
         assert (
             3 * v >= values["SecondFlrSF"]
         ), "First floor must be at least one third of the 2nd floor"
+        return v
+
+    @validator("FireplaceQuality")
+    def check_fireplace_quality(cls, v, values, **kwargs):
+        if values["Fireplaces"] > 0:
+            assert v is not None, "No fireplace quality while fireplaces exist"
         return v
 
 
