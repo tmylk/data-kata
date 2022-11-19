@@ -42,6 +42,11 @@ class House(BaseModel):
         return v
 
 
+@dataclass
+class HouseList:
+    houses: list
+
+
 def read_csv(csv_file: str = "data/train.csv") -> pd.DataFrame:
     return pd.read_csv(
         csv_file,

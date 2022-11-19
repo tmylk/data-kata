@@ -37,7 +37,7 @@
   - make it pass. Return a validation error
   - check can still create a House object with fireplacequality empty  empty while Fireplaces is 0
 
-- [ ] create a HouseList class to hold multiple houses
+- [x] create a HouseList class to hold multiple houses
     - write a failing test creating a list of two houses
     - make it pass 
 

@@ -1,5 +1,5 @@
 from pydantic import ValidationError
-from validate import House, read_csv
+from validate import House, HouseList, read_csv
 
 
 def test_csv_read():
@@ -176,3 +176,31 @@ def test_FireplaceQuality_missing_error():
         assert errors["loc"] == ("FireplaceQu",)
         assert errors["msg"] == "No fireplace quality while fireplaces exist"
         assert errors["type"] == "assertion_error"
+
+
+def test_house_list():
+
+    d_house_one = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 0,
+        "FireplaceQu": None,
+        "Street": "Sesame",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+    house_one = House(**d_house_one)
+
+    d_house_two = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 5,
+        "FireplaceQu": "Ex",
+        "Street": "Elm",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+    house_two = House(**d_house_two)
+
+    house_list = HouseList([house_one, house_two])
+    assert len(house_list.houses) == 2
