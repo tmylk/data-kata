@@ -23,6 +23,8 @@ Try it with several frameworks - pandas, pydantic, Great Expectations, Pandera, 
 
 For step-by-step guide with pydantic see ./pydantic/tasklist.md and files in pydantic/test_validate.py, pydandti/validate.py
 
+For solutions see Pull Requests.
+
 
 ## Credit
 
