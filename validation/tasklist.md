@@ -45,11 +45,14 @@
     - write a failing test creating a list of two houses with same Id
     - make it pass - Return a validation error
 
-- [ ] HouseList of valid houses from a csv
-    - write a failing test to read csv in data/train.csv and convert it to a house list. can you assert on number of houses?
-    - try to make it pass. You can disable Yearbuilt check for that and just focus on fireplacequality first
+- [x] HouseList only of valid houses
+    - write a failing test creating a list of two houses where one of them is invalid. Check it returns a list with only one valid house.
+    - make it pass 
+
+- [x] HouseList only of valid houses from csv
+
+    - write a failing test to read csv in data/train.csv and only return valid houses. can you assert on number of houses?
     - do you have an error for fireplacequality being NA? what does pandas use for the missing value? is it different to what pydantic expects as the missing value for FireplaceQuality? what is the best way to fix that? 
-    - now return only the houses with correct yearbuilt
 
 
 

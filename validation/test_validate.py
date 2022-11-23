@@ -1,5 +1,12 @@
+import pytest
 from pydantic import ValidationError
-from validate import House, HouseList, read_csv, read_valid_house_list_from_csv
+from validate import (
+    House,
+    HouseList,
+    convert_and_filter_to_valid_house_list,
+    read_csv,
+    read_valid_house_list_from_csv,
+)
 
 
 def test_csv_read():
@@ -240,6 +247,32 @@ def test_unique_id_error():
         assert errors["msg"] == "Id should be unique"
 
 
+def test_convert_and_filter_to_valid_house_list():
+    d_house_valid = {
+        "YearBuilt": 1800,
+        "Id": 1,
+        "Fireplaces": 0,
+        "FireplaceQu": None,
+        "Street": "Valid Street",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+
+    d_house_invalid = {
+        "YearBuilt": 3000,
+        "Id": 1,
+        "Fireplaces": 5,
+        "FireplaceQu": "Ex",
+        "Street": "Invalid",
+        "1stFlrSF": 100,
+        "2ndFlrSF": 50,
+    }
+    house_list = convert_and_filter_to_valid_house_list([d_house_valid, d_house_invalid])
+
+    assert len(house_list) == 1
+    assert house_list[0].Street == "Valid Street"
+
+
 def test_house_list_from_csv_read():
     house_list = read_valid_house_list_from_csv()
-    assert len(house_list) > 0
+    assert len(house_list) == 15

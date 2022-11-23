@@ -65,10 +65,23 @@ def read_csv(csv_file: str = "data/train.csv") -> pd.DataFrame:
     )
 
 
+def convert_and_filter_to_valid_house_list(house_dicts: List[dict]) -> List[House]:
+    house_list = []
+    for house_dict in house_dicts:
+        try:
+            house = House(**house_dict)
+            house_list.append(house)
+
+        except ValueError:
+            continue
+
+    return house_list
+
+
 def read_valid_house_list_from_csv(csv_file: str = "data/train.csv") -> HouseList:
     df = read_csv(csv_file=csv_file)
     # convert pandas float nan to None so that Pydantic Optional works for fireplace quality
     df = df.replace({np.nan: None})
-    house_list = [House(**house_dict) for house_dict in df.to_dict("index").values()]
+    house_list = convert_and_filter_to_valid_house_list(df.to_dict("index").values())
 
     return house_list
