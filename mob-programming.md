@@ -13,7 +13,7 @@
 - Configure Mob Timer
   - one person logs in to https://mobtime.fly.dev/
   - Create a timer with name "{color of your rug} timer"
-  - In Timer Settings/Mob Order, write the roles "Navigator, Driver, Next"
+  - In Timer Settings/Mob Order, write the roles "Typing, Talking, Next"
   - share the link with everyone
   - Everyone adds themselves to the mob
   - Everyone In client settings click "Enable Timer sounds"
