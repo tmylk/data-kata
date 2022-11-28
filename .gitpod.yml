@@ -5,6 +5,9 @@ tasks:
   - name: install reqs and start test
     init: pip3 install -r validation/pydantic/requirements.txt
     command: pytest-watch validation/pydantic/test_validate.py
-  
+
+vscode:
+  extensions:
+    - mechatroner.rainbow-csv
   
     
