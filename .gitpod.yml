@@ -1,7 +1,8 @@
 
 tasks:
-  - name: install reqs
+  - name: install reqs and start test
     init: pip3 install -r validation/pydantic/requirements.txt
-    
-  - name: start pytest
     command: pytest-watch validation/pydantic/test_validate.py
+    
+  
+    
