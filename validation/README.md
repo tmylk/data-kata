@@ -27,6 +27,10 @@ For step-by-step guide with pydantic see ./pydantic/tasklist.md and files in pyd
 
 For solutions see Pull Requests.
 
+## Mob programming
+
+To read about mob programming setup, read ../mob-programming.md
+
 
 ## Credit
 

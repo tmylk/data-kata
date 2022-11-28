@@ -1,7 +1,7 @@
 
 tasks:
   - name: open tasklist
-    command: code validation/pydantic/tasklist.md 
+    command: code validation/pydantic/tasklist.md mob-programming.md
   - name: install reqs and start test
     init: pip3 install -r validation/pydantic/requirements.txt
     command: pytest-watch validation/pydantic/test_validate.py
