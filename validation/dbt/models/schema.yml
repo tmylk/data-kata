@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: houses
+    tests:
+      - dbt_expectations.expect_table_row_count_to_equal:
+          value: 1460
+      - dbt_expectations.expect_table_columns_to_match_set:
+          column_list:
+            [
+              "Id",
+              "Street",
+              "YearBuilt",
+              "Fireplaces",
+              "FireplaceQu",
+              "1stFlrSF",
+              "2ndFlrSF",
+            ]
