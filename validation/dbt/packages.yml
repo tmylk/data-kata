@@ -2,3 +2,5 @@ packages:
   - package: calogica/dbt_expectations
     version: [">=0.8.0", "<0.9.0"]
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
+  - git: "https://github.com/EqualExperts/dbt-unit-testing"
+    revision: v0.2.6

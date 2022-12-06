@@ -23,12 +23,15 @@ seeds:
   +docs:
     node_color: "#cd7f32"
 
+
 models:
-  jaffle_shop:
-    materialized: table
-    staging:
-      materialized: view
-      +docs:
-        node_color: "silver"
-    +docs:
-      node_color: "gold"
+  houses:
+      materialized: table
+
+vars:
+  unit_tests_config:
+    debug: false
+    input_format: sql
+    column_separator: ","
+    line_separator: "\n"
+    type_separator: "::"    
