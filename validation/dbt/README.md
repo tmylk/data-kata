@@ -5,6 +5,12 @@ Coding exercise for improving Data skills
 
 This repo is for a solution using DBT and DuckDB. For Pydantic, see another repo.
 
+## Why DBT?
+
+The idea is to code only in SQL as there are Data Analyts who work in SQL and, say, PowerBI and are not proficient in Python.
+
+Curious to explore the third-party SQL unit-testing library https://github.com/EqualExperts/dbt-unit-testing/
+
 ## Exercise
 
 Load only valid rows from 'data/train.csv' 
