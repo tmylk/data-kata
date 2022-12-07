@@ -3,7 +3,7 @@ tasks:
   - name: open tasklist
     command: code validation/dbt/tasklist.md
   - name: install reqs and start test
-    init: python3 -m pip install -r validation/dbt/requirements.txt
+    init: python3 -m pip install -r validation/dbt/requirements.txt && pip install dbt-duckdb
     command: cd validation/dbt/ && dbt deps && dbt build
 
 vscode:
