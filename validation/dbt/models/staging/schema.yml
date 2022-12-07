@@ -3,8 +3,6 @@ version: 2
 models:
   - name: stg_houses
     tests:
-      - dbt_expectations.expect_table_row_count_to_equal:
-          value: 1460
       - dbt_expectations.expect_table_columns_to_match_set:
           column_list:
             [
@@ -37,6 +35,9 @@ models:
       tests:
         - dbt_expectations.expect_column_values_to_be_of_type:
             column_type: varchar
+        - dbt_expectations.expect_column_values_to_be_in_set:
+            value_set: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
+            quote_values: true
     - name: "1stFlrSF"
       tests:
         - dbt_expectations.expect_column_values_to_be_of_type:
