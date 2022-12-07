@@ -2,9 +2,11 @@
     - write failing test for row count in raw/schema.yml using dbt-expectations
     - use DBT seed command (this is against a [DBT best practice](https://docs.getdbt.com/docs/build/seeds) for loading dynamic data into DB, we are using it here just for concise tutorial )
 
-- [ ] staging column stg_houses reads data from the raw table and applys formatting checks. 
+- [ ] staging column stg_houses reads data from the raw table and applies formatting checks. 
     - in staging/schema.yml write failing test for column names using dbt-expectations
     - make the test pass by only selecting the right columns
+    - on green, think about refactoring. Would you like to rename fields to have more readable names? Do they have to be the same as CSV column names?
+    
 
 - [ ] column data types validation
     -  run the test on command line using 'dbt test' or 'dbt test --store-failures' command
@@ -20,17 +22,13 @@
   - use 'NA' to denote null in the list
   - check it passes using dbt test command
 
-- [ ] First business rule. Don't load row into the houses prod table if the business rule is failed. 
-    - Add a check that If Fireplaces is greater than 0, then FireplaceQu is required.
-    - use dbt-expectations expect_column_values_to_be_in_set with row_condition for both cases - 0 and >0
+- [ ] First business rule. "If Fireplaces is greater than 0, then FireplaceQu is required." Don't load row into the houses prod table from staging stg_houses if the business rule is failed. 
+    - See a regression unit test for creating a valid house in staging, and then checking it is copied to prod table in tests/unit_tests.sql It is using the clever dbt-testing library from Equal Experts
+    - uncomment a failing test that creates two rows in staging - one valid and one invalid. And expects only one of them to pass to prod. The reason there is  the valid row in input is that I can't set an expectation that the table is empty.
+    - see the nice error message running dbt test
+    - Add another common table SQL expression in houses.sql to make the test pass
 
-- [ ] data object
-    - write a failing test for creating a House object with  yearbuilt 1800
-    - make it pass - create with no errors
-    - one by one add Id=1, Street = 'Sesame', Fireplaces=0, FireplaceQu=None,  to the test and let it pass each time
-    - once on green, think about refactoring. Would you like to rename fields to have more readable names? Do they have to be the same as CSV column names?
     
-
 - [ ] validation YearBuilt
     - write a failing test for creating a House object with  yearbuilt 2000. It should return an error stating YearBuilt as the issue
     - make it pass. 

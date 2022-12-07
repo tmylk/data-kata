@@ -22,7 +22,24 @@ renamed as (
     from source
 
 
+),
+
+
+fireplacequ_required as (
+
+    select *
+
+    from renamed
+    where
+    (Fireplaces > 0 and
+    "FireplaceQu" is not null) 
+    OR
+    (Fireplaces == 0 and
+    "FireplaceQu" is null) 
+
+
+
 )
 
-select * from renamed
+select * from fireplacequ_required
 
