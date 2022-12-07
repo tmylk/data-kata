@@ -8,6 +8,22 @@ with source as (
 
 ),
 
+null_instead_of_na as (
+
+    select Id,
+              "Street",
+              "YearBuilt",
+              "Fireplaces",
+               NULLIF("FireplaceQu",'NA') as FireplaceQu,
+              "1stFlrSF" ,
+              "2ndFlrSF" 
+
+    from source
+
+
+),
+
+
 
 renamed as (
 
@@ -19,7 +35,7 @@ renamed as (
               "1stFlrSF" as FirstFlrSF,
               "2ndFlrSF" as SecondFlrSF
 
-    from source
+    from null_instead_of_na
 
 
 )

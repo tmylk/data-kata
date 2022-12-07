@@ -32,10 +32,10 @@ FireplaceQu_required as (
     from renamed
     where
     (Fireplaces > 0 and
-    "FireplaceQu" is not null) 
+    FireplaceQu is not null) 
     OR
     (Fireplaces == 0 and
-    "FireplaceQu" is null) 
+    FireplaceQu is null) 
 
 
 

@@ -20,6 +20,10 @@
     -  see a test for Id column having data type integer in staging/schema.yml line 22 using dbt-expectations
 
     - add remaining column type tests
+  
+- [ ] Null values
+  - how are null values marked in the CSV? It is NA word, not null
+  - use NULLIF to convert the columns to nulls 
 
 - [ ] when loading into staging, check the data format rule that FireplaceQuality has to be one of 'Ex', 'Gd', 'TA', 'Fa', 'Po', null
   - add the test to staging/schema.yml using dbt-expectations
@@ -45,7 +49,7 @@
 
 - [ ] check output
     - this is not required but you can see the output in terminal with `duckcli houses.duckdb` and `select * from houses`
-    - expect to see 5 houses
+    - expect to see 15 houses, just as in the pydantic solution
 
 
 
