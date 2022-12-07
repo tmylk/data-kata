@@ -61,7 +61,7 @@ run commands:
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install --upgrade pip
-python3 -m pip install -r dbt/requirements.txt
+python3 -m pip install -r requirements.txt
 #install dbt-expectations and dbt-unit-tests
 dbt deps 
 dbt build

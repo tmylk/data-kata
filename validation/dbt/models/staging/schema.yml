@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_houses
+    tests:
+      - dbt_expectations.expect_table_row_count_to_equal:
+          value: 1460
+      - dbt_expectations.expect_table_columns_to_match_set:
+          column_list:
+            [
+              "Id",
+              "Street",
+              "YearBuilt",
+              "Fireplaces",
+              "FireplaceQu",
+              "1stFlrSF",
+              "2ndFlrSF",
+            ]
+    columns:
+    - name: Id
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
