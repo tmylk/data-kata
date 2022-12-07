@@ -11,8 +11,8 @@ models:
               "YearBuilt",
               "Fireplaces",
               "FireplaceQu",
-              "1stFlrSF",
-              "2ndFlrSF",
+              "FirstFlrSF",
+              "SecondFlrSF",
             ]
     columns:
     - name: Id
@@ -38,11 +38,11 @@ models:
         - dbt_expectations.expect_column_values_to_be_in_set:
             value_set: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
             quote_values: true
-    - name: "1stFlrSF"
+    - name: "FirstFlrSF"
       tests:
         - dbt_expectations.expect_column_values_to_be_of_type:
             column_type: integer
-    - name: "2nsFlrSF"
+    - name: "SecondFloorSF"
       tests:
         - dbt_expectations.expect_column_values_to_be_of_type:
             column_type: integer

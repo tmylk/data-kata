@@ -16,8 +16,8 @@ renamed as (
               "YearBuilt",
               "Fireplaces",
               "FireplaceQu",
-              "1stFlrSF",
-              "2ndFlrSF"
+              FirstFlrSF,
+              SecondFlrSF
 
     from source
 
@@ -25,7 +25,7 @@ renamed as (
 ),
 
 
-fireplacequ_required as (
+FireplaceQu_required as (
 
     select *
 
@@ -39,7 +39,33 @@ fireplacequ_required as (
 
 
 
+),
+
+YearBuilt_range as (
+
+    select *
+
+    from FireplaceQu_required
+    where
+    (YearBuilt > 1700 and
+    YearBuilt < 1900) 
+
+
+
+),
+
+'1stFloor2ndFloorSF_check_passed' as (
+
+    select *
+
+    from YearBuilt_range
+    where
+    FirstFlrSF  > SecondFlrSF/3
+
+
+
 )
 
-select * from fireplacequ_required
+
+select * from '1stFloor2ndFloorSF_check_passed'
 

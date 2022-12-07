@@ -31,8 +31,9 @@ Format rules (abort load):
 If a business rule fails then skip this row and continue the load
 
 Business rules (skip record)
- - firstfloor is at least one third of the 2nd floor
  - If Fireplaces is greater than 0, FireplaceQu is required.
+ - YearBuilt value is between 1700 and 1900.
+ - firstfloor is at least one third of the 2nd floor
 
 ### Tasklist
 

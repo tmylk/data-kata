@@ -5,3 +5,8 @@ models:
     tests:
       - dbt_expectations.expect_table_row_count_to_equal:
           value: 1460
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null

@@ -16,8 +16,8 @@ renamed as (
               "YearBuilt",
               "Fireplaces",
               "FireplaceQu",
-              "1stFlrSF",
-              "2ndFlrSF"
+              "1stFlrSF" as FirstFlrSF,
+              "2ndFlrSF" as SecondFlrSF
 
     from source
 
