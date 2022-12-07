@@ -1,0 +1,37 @@
+name: "houses"
+
+config-version: 2
+version: "0.1"
+
+profile: "houses"
+
+model-paths: ["models"]
+seed-paths: ["../data"]
+test-paths: ["tests"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_modules"
+  - "logs"
+
+require-dbt-version: [">=1.0.0", "<2.0.0"]
+
+seeds:
+  +docs:
+    node_color: "#cd7f32"
+
+
+models:
+  houses:
+      materialized: table
+
+vars:
+  unit_tests_config:
+    debug: false
+    input_format: sql
+    column_separator: ","
+    line_separator: "\n"
+    type_separator: "::"    

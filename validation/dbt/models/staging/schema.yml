@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: stg_houses
+    tests:
+      - dbt_expectations.expect_table_columns_to_match_set:
+          column_list:
+            [
+              "Id",
+              "Street",
+              "YearBuilt",
+              "Fireplaces",
+              "FireplaceQu",
+              "FirstFlrSF",
+              "SecondFlrSF",
+            ]
+    columns:
+    - name: Id
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: Street
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: varchar
+    - name: YearBuilt
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: Fireplaces
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: FireplaceQu
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: varchar
+        - dbt_expectations.expect_column_values_to_be_in_set:
+            value_set: ['Ex', 'Gd', 'TA', 'Fa', 'Po']
+            quote_values: true
+            row_condition: "FireplaceQu is not null"
+    - name: "FirstFlrSF"
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: "SecondFloorSF"
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+

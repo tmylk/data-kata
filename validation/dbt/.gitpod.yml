@@ -1,0 +1,13 @@
+
+tasks:
+  - name: open tasklist
+    command: code validation/dbt/tasklist.md
+  - name: install reqs and start test
+    init: python3 -m pip install -r requirements.txt
+    command: dbt deps && dbt build
+
+vscode:
+  extensions:
+    - mechatroner.rainbow-csv
+  
+    
