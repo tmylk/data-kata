@@ -2,4 +2,7 @@ version: 2
 
 models:
   - name: houses
+    tests:
+      - dbt_expectations.expect_table_row_count_to_equal:
+         value: 15
 

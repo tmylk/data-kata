@@ -15,7 +15,7 @@
 
 - [ ] column data types validation
     -  run the test on command line using 'dbt test' or 'dbt test --store-failures' command
-       - id you use 'dbt test --store-failures' then you can inspect the failures in db by using 'duckcli houses.duckdb'
+       - id you use `dbt test --store-failures` then you can inspect the failures in db by using 'duckcli houses.duckdb'
        - you can also see what the test actually does by clicking on a link to complied code in the console, like  `compiled Code at target/compiled/houses/models/staging/schema.yml/dbt_expectations_expect_column_dfc73812841a97c03866cb28a5063a04.sql`
     -  see a test for Id column having data type integer in staging/schema.yml line 22 using dbt-expectations
 
@@ -23,12 +23,13 @@
   
 - [ ] Null values
   - how are null values marked in the CSV? It is NA word, not null
-  - use NULLIF to convert the columns to nulls 
+  - use NULLIF to convert the FireplaceQu column to nulls if the text is NA. It is important to do it, as we mock the data in unit tests, and we need to know how to mock unit values correctly. I didn't do this step in my solution and ended up with a bug. :)
 
 - [ ] when loading into staging, check the data format rule that FireplaceQuality has to be one of 'Ex', 'Gd', 'TA', 'Fa', 'Po', null
-  - add the test to staging/schema.yml using dbt-expectations
-  - use 'NA' to denote null in the list
-  - check it passes using dbt test command
+  - add the expect_column_values_to_be_in_set test to staging/schema.yml using dbt-expectations
+  - run it using dbt test command
+  - do you see the errors? how does the test deal with null values? 
+  - One suggest is to add to the test row_condition that the FireplaceQuality field is not null, and remove the null vaue from the valid set
 
 - [ ] First business rule. "If Fireplaces is greater than 0, then FireplaceQu is required." Don't load row into the houses prod table from staging stg_houses if the business rule is failed. 
     - See a regression unit test for creating a valid house in staging, and then checking it is copied to prod table in tests/unit_tests.sql It is using the clever dbt-testing library from Equal Experts
@@ -47,7 +48,9 @@
     - write a failing test for creating a House staging row with  1stFlrSF=10, 2ndFlrSF=50. Expect the house prod table to be empty.
     - make it pass. 
 
-- [ ] check output
+- [ ] check output is 15 rows. From other solutions, we expect to see 15 rows as output
+    - add a row count check to to models/schema.yml
+    - check it passes
     - this is not required but you can see the output in terminal with `duckcli houses.duckdb` and `select * from houses`
     - expect to see 15 houses, just as in the pydantic solution
 
