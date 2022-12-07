@@ -1,13 +1,15 @@
-- [ ] read raw input data from data/train.csv into stg_housing
+- [x] read raw input data from data/train.csv into stg_housing
     - write failing test for row count in staging/schema.yml using dbt-expectations
-    - let it pass
+    - use DBT seed command (this is against a [DBT best practice](https://docs.getdbt.com/docs/build/seeds) for loading dynamic data into DB, here just for concise tutorial )
     - write failing test for column names
     - make the test pass
 
 - [ ] column data types 
     -  see a test for Id column having data type integer in staging/schema.yml line 22 using dbt-expectations
-    -  add remaining column type tests
-    -  Unfortunately I don't know how to test this type validation actually works we can't expect a test to produce an exception or faiilure easily
+    -  run the test on command line using 'dbt test' or 'dbt test --store-failures' command
+       - id you use 'dbt test --store-failures' then you can inspect the failures in db by using 'duckcli houses.duckdb'
+    - add remaining column type tests
+    -  Unfortunately I don't know how to test this type validation actually works we can't expect a test to produce an exception or faiilure easily. I just did an ad-hoc test and decided to trust DBT expectations after that... :(
 
 
 - [ ] data object

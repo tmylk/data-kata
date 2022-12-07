@@ -21,4 +21,28 @@ models:
       tests:
         - dbt_expectations.expect_column_values_to_be_of_type:
             column_type: integer
-      
+    - name: Street
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: varchar
+    - name: YearBuilt
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: Fireplaces
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: FireplaceQu
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: varchar
+    - name: "1stFlrSF"
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+    - name: "2nsFlrSF"
+      tests:
+        - dbt_expectations.expect_column_values_to_be_of_type:
+            column_type: integer
+
