@@ -37,9 +37,19 @@ Business rules (skip record)
 
 ### Tasklist
 
-For step-by-step guide with pydantic see [the tasklist]()./pydantic/tasklist.md) and files in pydantic/test_validate.py, pydandti/validate.py
+For step-by-step guide with pydantic see [the tasklist]()./dbt/tasklist.md) 
 
-For solutions see Pull Requests.
+For solution see Pull Request.
+
+
+
+## Mob programming
+
+To read about mob programming setup, read 
+
+- [How to configure tech for mob programming](mob-programming.md)
+
+
 
 ### Setup
 
@@ -52,6 +62,6 @@ python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
-#install dbt-expectations
+#install dbt-expectations and dbt-unit-tests
 dbt deps 
 dbt build
